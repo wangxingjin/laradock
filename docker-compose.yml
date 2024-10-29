@@ -432,7 +432,8 @@ services:
 
   ### Redis ################################################
     redis:
-      build: ./redis
+      image: ccr.ccs.tencentyun.com/wangyang/laradock_redis:dev_20240821_redis
+      # build: ./redis
       volumes:
         - ${DATA_PATH_HOST}/redis:/data
       # command: --requirepass ${REDIS_PASSWORD}
