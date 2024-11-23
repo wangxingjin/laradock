@@ -44,8 +44,7 @@ RUN wget --quiet https://repo1.maven.org/maven2/com/facebook/presto/presto-serve
 
 COPY start.sh /usr/local/bin/start.sh
 COPY ./.bashrc /opt/hadoop
-RUN chmod +x /etc/profile.d/hive.sh && \
-    chmod +x /usr/local/bin/start.sh && \
+RUN chmod +x /usr/local/bin/start.sh && \
     chmod +x /opt/hadoop/.bashrc
 
 USER hadoop
