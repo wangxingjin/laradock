@@ -26,3 +26,6 @@ docker-compose.custom.yml
 
 .DS_Store
 /coder-server
+/hadoop/logs
+/hadoop/presto/etc/catalog/*
+/hadoop/hive_workspace

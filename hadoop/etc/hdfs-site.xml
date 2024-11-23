@@ -1,0 +1,52 @@
+<configuration>
+  <property>
+    <name>dfs.replication</name>
+    <value>1</value>
+  </property>
+  <property>
+      <name>dfs.namenode.name.dir</name>
+      <value>file:/tmp/hadoop-hadoop/dfs/name</value>
+  </property>
+
+  <property>
+      <name>dfs.namenode.checkpoint.dir</name>
+      <value>file:/tmp/hadoop-hadoop/dfs/namesecondary</value>
+  </property>
+  <property>
+      <name>dfs.datanode.data.dir</name>
+      <value>file:/tmp/hadoop-hadoop/dfs/datanode</value>
+  </property>
+  <property>
+    <name>http.requests.namenode.log.enabled</name>
+    <value>true</value>
+  </property>
+
+    <!-- 指定日志文件的路径 -->
+  <property>
+    <name>http.requests.namenode.log.file</name>
+    <value>file:/opt/hadoop/logs/namenode-http-request.log</value>
+  </property>
+
+  <!-- 设置日志的保留天数 -->
+  <property>
+    <name>http.requests.namenode.log.retention.days</name>
+    <value>7</value>
+  </property>
+    <!-- 启用 Secondary NameNode 的 HTTP 请求日志 -->
+  <property>
+      <name>http.requests.secondary.log.enabled</name>
+      <value>true</value>
+  </property>
+
+  <!-- 指定日志文件的路径 -->
+  <property>
+      <name>http.requests.secondary.log.file</name>
+      <value>file:/opt/hadoop/logs/secondary-http-request.log</value>
+  </property>
+
+  <!-- 设置日志的保留天数 -->
+  <property>
+      <name>http.requests.secondary.log.retention.days</name>
+      <value>7</value>
+  </property>
+</configuration>

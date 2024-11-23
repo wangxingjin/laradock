@@ -32,6 +32,8 @@ RUN apk --update add wget \
   cyrus-sasl-dev \
   libgsasl-dev \
   oniguruma-dev \
+  nodejs \
+  npm \
   supervisor; \
   if [ $(php -r "echo PHP_VERSION_ID - PHP_RELEASE_VERSION;") = "50600" ] || \
      [ $(php -r "echo PHP_VERSION_ID - PHP_RELEASE_VERSION;") = "70000" ]; then \
@@ -405,7 +407,7 @@ RUN set -eux; \
     elif [ $(php -r "echo PHP_MAJOR_VERSION;") = "7" ]; then \
       pecl install swoole-4.8.12; \
     else \
-      pecl install swoole; \
+      pecl install swoole-4.8.13; \
     fi; \
     docker-php-ext-enable swoole; \
     php -m | grep -oiE '^swoole$'; \
