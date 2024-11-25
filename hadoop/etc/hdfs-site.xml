@@ -5,16 +5,16 @@
   </property>
   <property>
       <name>dfs.namenode.name.dir</name>
-      <value>file:/tmp/hadoop-hadoop/dfs/name</value>
+      <value>file:/data/hadoop/namenode</value>
   </property>
 
   <property>
       <name>dfs.namenode.checkpoint.dir</name>
-      <value>file:/tmp/hadoop-hadoop/dfs/namesecondary</value>
+      <value>file:/data/hadoop/namesecondary</value>
   </property>
   <property>
       <name>dfs.datanode.data.dir</name>
-      <value>file:/tmp/hadoop-hadoop/dfs/datanode</value>
+      <value>file:/data/hadoop/datanode</value>
   </property>
   <property>
     <name>http.requests.namenode.log.enabled</name>

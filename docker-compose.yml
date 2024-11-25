@@ -946,7 +946,7 @@ services:
         - ./hadoop/logs/hadoop:/opt/hadoop/logs
         - ./hadoop/logs/hive/:/opt/hive/logs/
         - ./hadoop/logs/presto/:/opt/presto-server/var/log
-        - ${DATA_PATH_HOST}/hadoop:/data/hadoop/datanode
+        - ${DATA_PATH_HOST}/hadoop:/data/hadoop
         - ./hadoop/start.sh:/usr/local/bin/start.sh
       networks:
         - hadoop
