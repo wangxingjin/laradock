@@ -954,3 +954,21 @@ services:
         - hadoop
         - backend
       restart: always
+    hadoop-client:
+      image: ${IMAGE_HADOOP_CLIENT:-laradock-hadoop:latest}  # 使用相同的 Hadoop 镜像
+      ports:
+        - "${HADOOP_SSH_PORT_CLIENT}:22"  # 开放 SSH 端口（需要定义新的环境变量）
+        - "${HIVE_METASTORE_URI_PORT_CLIENT}:9083"  # 开放 Hive Metastore 端口（需要定义新的环境变量）
+      volumes:
+        - ./hadoop/client/etc/:/opt/hadoop/etc/hadoop  # 将本地目录改为 hadoop/client
+        - ./hadoop/client/hivecfg/:/opt/hive/conf
+        - ./hadoop/client/hive_workspace/:/opt/hive/hive_workspace
+        - ./hadoop/client/presto/etc:/opt/presto-server/etc
+        - ./hadoop/client/logs/hadoop:/opt/hadoop/logs
+        - ./hadoop/client/logs/hive/:/opt/hive/logs/
+        - ./hadoop/client/logs/presto/:/opt/presto-server/var/log
+        - ./hadoop/client/start.sh:/usr/local/bin/start.sh
+        - ${DATA_PATH_HOST}/hadoop:/data/hadoop
+      networks:
+        - hadoop
+      restart: always
