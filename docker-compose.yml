@@ -972,3 +972,15 @@ services:
       networks:
         - hadoop
       restart: always
+    dnsmasq:
+      # image: dnsmasq/dnsmasq
+      build:
+        context: ./dnsmasq
+      container_name: dnsmasq
+      ports:
+        - "53:53/udp"
+        - "53:53/tcp"
+      restart: unless-stopped
+      volumes:
+        - ./dnsmasq/dnsmasq.conf:/etc/dnsmasq.conf
+        - ./dnsmasq/conf:/etc/dnsmasq.d
