@@ -1,0 +1,42 @@
+# 使用基础镜像
+FROM ubuntu:22.04
+
+# 设置环境变量，避免交互式安装
+ENV DEBIAN_FRONTEND=noninteractive
+ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
+
+# 安装依赖和工具
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    wget \
+    gnupg \
+    ca-certificates \
+    supervisor \
+    curl && \
+    rm -rf /var/lib/apt/lists/*
+
+# 只安装 ASP.NET Core 运行时（包含 .NET 运行时）
+RUN wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
+    dpkg -i packages-microsoft-prod.deb && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+    apt-transport-https \
+    aspnetcore-runtime-8.0 && \
+    rm -rf /var/lib/apt/lists/*
+
+# 创建应用目录
+WORKDIR /app
+
+# 创建 Supervisor 配置目录
+RUN mkdir -p /var/log/supervisor && \
+    mkdir -p /var/run && \
+    mkdir -p /etc/supervisor/conf.d
+
+# 复制 Supervisor 配置文件
+COPY supervisord.conf /etc/supervisor/supervisord.conf
+
+# 暴露端口
+EXPOSE 16090 16091 6080 6082 6090 6091 6092
+
+# 启动 Supervisor
+CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
