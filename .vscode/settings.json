@@ -2,5 +2,6 @@
     "files.associations": {
         ".env.example": "dotenv",
         "Dockerfile-*": "dockerfile"
-    }
+    },
+    "idf.pythonInstallPath": "/usr/bin/python3"
 }

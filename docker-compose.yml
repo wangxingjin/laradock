@@ -24,6 +24,8 @@ volumes:
     driver: ${VOLUMES_DRIVER}
   hadoop:
     driver: ${VOLUMES_DRIVER}
+  emqx:
+    driver: ${VOLUMES_DRIVER}
 
 services:
 
@@ -780,7 +782,7 @@ services:
 
 ### Docker-in-Docker ################################################
     docker-in-docker:
-      image: ${IMAGE_DOCKER_IN_DOCKER:-laradock-docker-in-docker:latest}
+      image: ${IMAGE_DOCKER_IN_DOCKER:-docker:20.10-dind}
       environment:
         DOCKER_TLS_SAN: DNS:docker-in-docker
       privileged: true
@@ -952,5 +954,22 @@ services:
         - ./hadoop/start.sh:/usr/local/bin/start.sh
       networks:
         - hadoop
+        - backend
+      restart: always
+  ### emqx server ####################################################
+    emqx:
+      image: emqx/emqx:5.8.7
+      ports:
+        - "${EMQX_WEBSOCKET_PORT}:8083"
+        - "${EMQX_WEBSOCKETS_PORT}:8084"
+        - "${EMQX_SSL_TLS_PORT}:8883"
+        - "${EMQX_SSL_TCP_PORT}:1883"
+        - "${EMQX_QUIC_PORT}:18083"
+      volumes:
+        - ${DATA_PATH_HOST}/emqx_data:/opt/emqx/data
+        - ./emqx/etc:/opt/emqx/etc
+        - ./logs/emqx:/opt/emqx/log
+      networks:
+        - frontend
         - backend
       restart: always
