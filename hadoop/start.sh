@@ -35,5 +35,8 @@ fi
 $HIVE_HOME/bin/hiveserver2 >> $HIVE_HOME/logs/hiveserver2.log 2>&1 &
 $HIVE_HOME/bin/hive --service metastore >> $HIVE_HOME/logs/thriftserver.log 2>&1 &
 $PRESTO_HOME/bin/launcher start
+if [ -e $HIVE_HOME/hive_workspace/porttranfer.sh ]; then
+    bash $HIVE_HOME/hive_workspace/porttranfer.sh
+fi
 # 保持容器运行
 tail -f /dev/null

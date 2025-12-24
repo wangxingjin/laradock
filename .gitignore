@@ -29,3 +29,6 @@ docker-compose.custom.yml
 /hadoop/logs
 /hadoop/presto/etc/catalog/*
 /hadoop/hive_workspace
+/hadoop/hivecfg
+/hadoop/client
+/hadoop/etc
